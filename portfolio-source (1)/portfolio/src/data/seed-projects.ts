@@ -1,0 +1,103 @@
+import type { Project } from "@/lib/types"
+
+/** Sample work shown until you add your own. Covers are generated ("cover:<kind>:<palette>"). */
+const t = Date.UTC(2026, 0, 1)
+
+export const SEED_PROJECTS: Project[] = [
+  {
+    id: "seed-ledgerline",
+    title: "Ledgerline",
+    description: "A calm finance dashboard for freelancers: cash flow, invoices, and tax set-asides on one screen.",
+    details:
+      "Freelancers told us their accounting tools were built for accountants. Ledgerline starts from the questions they actually ask: who owes me, what can I spend, and what should I set aside for tax?\n\nI designed the product end to end and built the front end in React and TypeScript, with Supabase for auth and data. The dashboard loads in under a second on a mid-range phone, and every chart has a keyboard-accessible table view.",
+    image: "cover:dashboard:ocean",
+    category: "Web app",
+    tags: ["React", "TypeScript", "Recharts", "Supabase"],
+    liveUrl: "https://example.com/",
+    githubUrl: "https://github.com/",
+    year: "2026",
+    featured: true,
+    createdAt: t + 6,
+    updatedAt: t + 6,
+  },
+  {
+    id: "seed-tidewalk",
+    title: "Tidewalk",
+    description: "Coastal walking routes that check the tide table first, so you never get cut off by the water.",
+    details:
+      "Tidewalk plans walks along tidal coastlines and warns you when a route crosses ground that floods. I ran the design sprint, built the interactive map prototype, and specified the route-safety states with the engineering team.\n\nThe app store listing isn't live yet, so there is no public demo. The prototype and case study are available on request.",
+    image: "cover:mobile:teal",
+    category: "Mobile",
+    tags: ["React Native", "Mapbox", "Figma", "Expo"],
+    liveUrl: "",
+    githubUrl: "https://github.com/",
+    year: "2026",
+    featured: false,
+    createdAt: t + 5,
+    updatedAt: t + 5,
+  },
+  {
+    id: "seed-fernhouse",
+    title: "Fernhouse",
+    description: "A plant shop storefront with care guides built into every product page.",
+    details:
+      "Fernhouse sells houseplants online, and returns were high because people bought plants their homes couldn't support. I redesigned the storefront so light, pet safety, and difficulty appear before the price.\n\nBuilt with Next.js, Stripe Checkout, and a headless CMS the owner edits without me. Product pages score 98+ on Lighthouse.",
+    image: "cover:store:moss",
+    category: "E-commerce",
+    tags: ["Next.js", "Stripe", "Tailwind CSS", "Sanity"],
+    liveUrl: "https://example.com/",
+    githubUrl: "",
+    year: "2025",
+    featured: false,
+    createdAt: t + 4,
+    updatedAt: t + 4,
+  },
+  {
+    id: "seed-prism-ui",
+    title: "Prism UI",
+    description: "An open-source design system: tokens, accessible components, and a Figma library that matches the code.",
+    details:
+      "Prism is a small, opinionated component library I maintain. Design tokens live in one JSON file that generates both the Tailwind theme and the Figma variables, so design and code can't drift apart.\n\nEvery component ships with keyboard and screen-reader tests, and the Storybook doubles as documentation.",
+    image: "cover:system:sky",
+    category: "Design system",
+    tags: ["Storybook", "Radix UI", "Tailwind CSS", "Figma tokens"],
+    liveUrl: "https://example.com/",
+    githubUrl: "https://github.com/",
+    year: "2025",
+    featured: false,
+    createdAt: t + 3,
+    updatedAt: t + 3,
+  },
+  {
+    id: "seed-northbeam",
+    title: "Northbeam Studio",
+    description: "A marketing site for an architecture studio, where the drawings do the talking.",
+    details:
+      "Northbeam wanted a site that felt like walking through one of their buildings. I designed a scroll sequence that reveals each project from plan to finished photograph, and built it in Astro so pages stay fast despite the imagery.\n\nClient work, so the source isn't public.",
+    image: "cover:landing:graphite",
+    category: "Marketing site",
+    tags: ["Astro", "GSAP", "Sanity"],
+    liveUrl: "https://example.com/",
+    githubUrl: "",
+    year: "2024",
+    featured: false,
+    createdAt: t + 2,
+    updatedAt: t + 2,
+  },
+  {
+    id: "seed-standup",
+    title: "Standup",
+    description: "Async standups and a lightweight board for teams who'd rather not meet at 9:30.",
+    details:
+      "Standup replaces the daily meeting with a two-minute written check-in, then turns the answers into a board the whole team can see. Drag-and-drop, live cursors, and optimistic updates keep it feeling instant.\n\nI built the full stack: React on the front, Node and PostgreSQL behind it, with WebSockets for presence.",
+    image: "cover:kanban:coral",
+    category: "Web app",
+    tags: ["React", "Node.js", "PostgreSQL", "WebSockets"],
+    liveUrl: "https://example.com/",
+    githubUrl: "https://github.com/",
+    year: "2024",
+    featured: false,
+    createdAt: t + 1,
+    updatedAt: t + 1,
+  },
+]

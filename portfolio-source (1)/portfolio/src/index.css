@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light: cool paper, deep-ink text, interface blue + highlighter yellow. */
+    --background: 210 33% 96%;
+    --foreground: 214 34% 9%;
+    --card: 210 40% 99%;
+    --card-foreground: 214 34% 9%;
+    --popover: 210 40% 99%;
+    --popover-foreground: 214 34% 9%;
+    --primary: 214 34% 9%;
+    --primary-foreground: 210 33% 97%;
+    --secondary: 210 28% 92%;
+    --secondary-foreground: 214 34% 9%;
+    --muted: 210 28% 92%;
+    --muted-foreground: 214 16% 36%;
+    --accent: 210 30% 90%;
+    --accent-foreground: 214 34% 9%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 22% 84%;
+    --input: 214 22% 80%;
+    --ring: 216 100% 48%;
+    --signal: 216 100% 48%;
+    --signal-ink: 217 100% 36%;
+    --marker: 43 100% 55%;
+    --glass-shadow: 214 45% 32%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 214 34% 7%;
+    --foreground: 210 30% 95%;
+    --card: 214 30% 10%;
+    --card-foreground: 210 30% 95%;
+    --popover: 214 30% 10%;
+    --popover-foreground: 210 30% 95%;
+    --primary: 210 30% 95%;
+    --primary-foreground: 214 34% 7%;
+    --secondary: 214 26% 15%;
+    --secondary-foreground: 210 30% 95%;
+    --muted: 214 26% 15%;
+    --muted-foreground: 214 14% 68%;
+    --accent: 214 26% 18%;
+    --accent-foreground: 210 30% 95%;
+    --destructive: 0 70% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 22% 21%;
+    --input: 214 22% 25%;
+    --ring: 213 100% 70%;
+    --signal: 213 100% 70%;
+    --signal-ink: 213 100% 74%;
+    --marker: 43 100% 55%;
+    --glass-shadow: 220 60% 2%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background font-sans text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  ::selection {
+    background: hsl(var(--marker) / 0.55);
+    color: hsl(214 34% 9%);
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Page column. */
+  .wrap {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Headline face: Anybody, with its width axis exposed as --wdth. */
+  .display {
+    font-family: Anybody, "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-variation-settings: "wdth" var(--wdth, 100);
+    font-stretch: calc(var(--wdth, 100) * 1%);
+  }
+
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Glassmorphism: translucent card, blurred backdrop, hairline edge, soft lift. */
+  .glass {
+    background: hsl(var(--card) / 0.6);
+    -webkit-backdrop-filter: blur(18px) saturate(1.6);
+    backdrop-filter: blur(18px) saturate(1.6);
+    border: 1px solid hsl(var(--foreground) / 0.1);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.35),
+      0 18px 40px -26px hsl(var(--glass-shadow) / 0.55);
+  }
+  .dark .glass {
+    background: hsl(var(--card) / 0.55);
+    box-shadow:
+      inset 0 1px 0 hsl(0 0% 100% / 0.07),
+      0 18px 44px -24px hsl(var(--glass-shadow) / 0.9);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass {
+      background: hsl(var(--card) / 0.94);
+    }
+  }
+
+  /* Colour behind the glass, so the blur has something to blur. */
+  .blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(72px);
+    will-change: transform;
+  }
+  .blob-drift {
+    animation: blob-drift 22s ease-in-out infinite alternate;
+  }
+
+  /* Faint layout grid that fades out down the page. */
+  .canvas-grid {
+    background-image:
+      linear-gradient(hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, transparent 85vh);
+    mask-image: linear-gradient(to bottom, #000 0, transparent 85vh);
+  }
+
+  /* Selection handles on the hero headline. */
+  .handle {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: hsl(var(--background));
+    border: 1.5px solid hsl(var(--signal));
+  }
+
+  .rise {
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+      transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* The named cursor arrives, clicks once, then rests. */
+  .kai-cursor {
+    animation: kai-arrive 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1.1s both;
+  }
+  .kai-click {
+    animation: kai-click 0.8s ease-out 2.5s both;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes blob-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-36px, 28px, 0) scale(1.08);
+  }
+}
+@keyframes kai-arrive {
+  from {
+    opacity: 0;
+    transform: translate(90px, 70px);
+  }
+  25% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes kai-click {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .rise,
+  .blob-drift,
+  .kai-cursor,
+  .kai-click {
+    animation: none;
+  }
+  .kai-click {
+    display: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
