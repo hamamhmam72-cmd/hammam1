@@ -5,7 +5,7 @@ export const profile = {
   name: "Hammam",
   initials: "H",
   role: "Product designer & front-end engineer",
-  email: "hello@example.com",
+  email: "Hamamhmam72@gmail.com",
   availability: "Booking projects for Q4 2026",
   responseTime: "Within a day",
   intro:
